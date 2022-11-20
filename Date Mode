@@ -1,0 +1,32 @@
+#include <stdio.h>     
+#include <time.h>      
+#include<iostream>
+using namespace std;
+class Date{
+private:
+	int year, mon, day;
+public:
+	 Date(int x,int y, int z) : year(x),mon(y),day(z){};
+	 void getDays(){
+	 	struct tm ndate;
+	 	time_t now;
+	 	double seconds;
+	 	time(&now);
+	 	ndate.tm_hour = 0; ndate.tm_min = 0; ndate.tm_sec = 0;
+  		ndate.tm_mon = mon - 1;  ndate.tm_mday = day;
+  		ndate.tm_year = year - 1900;
+  		long long days = (difftime(now, mktime(&ndate)) / 3600 / 24);
+  		//cout<<difftime(now, mktime(&ndate)) / 3600 / 24<<endl;
+  		cout << days<<endl;
+	 }
+};
+
+int main ()
+{
+	int x,y,z;
+	cin>>x>>y>>z;
+	cout<<"天数："; 
+	Date aday(x,y,z);
+	aday.getDays() ;
+	return 0;
+}
